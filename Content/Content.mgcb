@@ -13,6 +13,9 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Font/messageFont.spritefont
+/copy:Font/messageFont.spritefont
+
 #begin Images/16-bit-planet1.png
 /importer:TextureImporter
 /processor:TextureProcessor
