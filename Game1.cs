@@ -49,8 +49,8 @@ namespace Mono_Topic_2_Assignment
             seconds = 0f;
             respawnTime = 3f;
             message = "Explaination as to why it's similar to the Tutorial:";
-            messageTwo = "Once you exit this page, you'll notice that the assignement is almost completely identical to the tutorial. And you might wonder, 'Oh, why is that? Are you just being lazy?' No. It's because it made the most sense (to me) to just take what was on the tutorial and add the new stuff onto it instead of making an entirely new thing with the same code with different textures. And to make this actually feel like an assignment, I actually made a whole new project and re-typed all of the code from the tutorial so that I could add more things onto it, and not just copy and paste the code to make it easier on me. And of course there will be new things for the actual assignment.";
-            messageThree = "But enough yapping, here's some instructions: Left Click - Delete the Planets Right Click - Change Planet Texture";
+            messageTwo = "Once you exit this page, you'll notice that the assignement is\n almost completely identical to the tutorial. And it's because it\n made the most sense to me to just take what was on the tutorial,\n add the new stuff onto it instead of making an entirely new thing\n with the same code and different textures, and made this actually\n feel like an assignment by re-typing everything instead of\n copying and pasting the code.";
+            messageThree = "But enough word salad, here's some instructions:\n Left Click - Delete Planets | Right Click - Change Planet Texture";
             screen = Screens.Title;
             
 
@@ -114,6 +114,20 @@ namespace Mono_Topic_2_Assignment
                         }
                     }
                 }
+                else if (mouseState.RightButton == ButtonState.Pressed)
+                {
+                    for (int i = 0; i < planetRects.Count; i++)
+                    {
+                        if (planetRects[i].Contains(mouseState.Position))
+                        {
+                            planetTextures[i] = textures[generator.Next(textures.Count)];
+                        }
+                    }
+                }
+                if (keyboardState.IsKeyDown(Keys.Q))
+                {
+                    Exit();
+                }
             }
             base.Update(gameTime);
         }
@@ -126,21 +140,26 @@ namespace Mono_Topic_2_Assignment
             _spriteBatch.Begin();
             if (screen == Screens.Title)
             {
-                _spriteBatch.DrawString(titleFont, "Miracle McMahon", new Vector2(300, 10), Color.White);
-                _spriteBatch.DrawString(titleFont, "Left Click to Continue", new Vector2(400, 50), Color.White);
+                _spriteBatch.DrawString(titleFont, "Miracle McMahon", new Vector2(275, 10), Color.Black);
+                _spriteBatch.DrawString(titleFont, "Left Click to Continue", new Vector2(250, 400), Color.Black);
             }
             else if (screen == Screens.Explaination)
             {
-                _spriteBatch.DrawString(titleFont, "Press Enter to Continue", new Vector2(300, 10), Color.White);
+                _spriteBatch.DrawString(titleFont, message, new Vector2(10, 10), Color.Black);
+                _spriteBatch.DrawString(titleFont, messageTwo, new Vector2(5, 75), Color.Black);
+                _spriteBatch.DrawString(titleFont, messageThree, new Vector2(5, 330), Color.Black);
+                _spriteBatch.DrawString(titleFont, "Press Enter to Continue", new Vector2(270, 450), Color.Black);
             }
             else if (screen == Screens.Game)
-            {
+            {   
                 _spriteBatch.Draw(spaceBackgroundTexture, window, Color.White);
                 for (int i = 0; i < planetRects.Count; i++)
                 {
                     _spriteBatch.Draw(planetTextures[i], planetRects[i], Color.White);
                 }
+                _spriteBatch.DrawString(titleFont, "Press Q to Quit", new Vector2(10, 10), Color.White);
             }
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

@@ -14,7 +14,9 @@
 #---------------------------------- Content ---------------------------------#
 
 #begin Font/messageFont.spritefont
-/copy:Font/messageFont.spritefont
+/importer:
+/processor:
+/build:Font/messageFont.spritefont
 
 #begin Images/16-bit-planet1.png
 /importer:TextureImporter
